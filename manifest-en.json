@@ -1,0 +1,32 @@
+{
+  "id": "./",
+  "scope": "./",
+  "start_url": "./en/",
+  "display": "standalone",
+  "name": "SEISMO Seismic Roulette — The Pulse of the Earth",
+  "short_name": "SEISMO",
+  "description": "A free science game powered by live seismic data. Spin the 0–36 wheel and verify the number with SHA-256.",
+  "lang": "en",
+  "theme_color": "#091514",
+  "background_color": "#091514",
+  "icons": [
+    {
+      "src": "favicons/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicons/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
