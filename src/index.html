@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Σεισμική Ρουλέτα · SEISMO — Ο παλμός της Γης</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header><div class="top"><a class="brand" href="/" aria-label="SEISMO αρχική"><i></i> SEISMO</a><span class="phase">Ο παλμός της Γης</span><span id="mode" class="mode">Σύνδεση</span></div></header>
+<main>
+<div class="intro"><div><h1>Σεισμική Ρουλέτα</h1><p>Η Γη δίνει τα δεδομένα. Τα μαθηματικά δίνουν τον αριθμό.</p></div><a id="rules" href="./stations.txt">Κατάλογος σταθμών</a></div>
+<div class="layout">
+<section class="wheel-panel" aria-label="Ρουλέτα">
+  <div class="wheel-top"><div><small>ΕΥΡΩΠΑΪΚΗ ΡΟΥΛΕΤΑ</small><div class="sub">37 θέσεις · 0–36</div></div><div class="clock"><span id="timer">20</span><span>s</span></div></div>
+  <div class="wheel-wrap"><canvas id="wheel" width="790" height="790" aria-label="Τροχός ευρωπαϊκής ρουλέτας με 37 αριθμούς" role="img"></canvas><div class="needle"></div></div>
+  <div class="wheel-bottom">
+    <div id="output" class="output" role="status">Άνοιγμα εφαρμογής</div>
+    <div class="spin-controls"><label for="duration">Παράθυρο</label><select id="duration"><option value="1">1 s</option><option value="3">3 s</option><option value="5">5 s</option><option value="10">10 s</option></select><label for="spinLength">Χρόνος γύρου</label><select id="spinLength"><option>20</option><option>30</option><option>45</option><option>60</option></select><button id="spin" type="button" disabled>SPIN <span id="spinLabel">20 s</span></button></div>
+    <p id="roundlink" class="muted small"></p>
+    <div id="roundActions" class="links"></div>
+    <details id="effects"><summary>Εφέ περιστροφής</summary><div class="links effect-options">
+    <label><input id="fxOff" type="checkbox"> Απενεργοποίηση όλων</label>
+    <label><input id="visual" type="checkbox" checked> Μικροδονήσεις</label>
+    <label><input id="haptic" type="checkbox"> Δόνηση κινητού</label>
+    <label><input id="sound" type="checkbox"> Ήχος</label></div></details>
+    <label class="small" for="catalogFile" id="catalogPicker" hidden>Άνοιγμα stations.txt <input id="catalogFile" type="file" accept=".txt,text/plain"></label>
+  </div>
+  <div class="player">
+    <label for="alias">Ψευδώνυμο <input id="alias" type="text" maxlength="32" placeholder="Προαιρετικό" autocomplete="off"></label>
+    <label for="pick">Επιλογή αριθμού <select id="pick"></select></label>
+    <label for="chip">Εικονική μάρκα <select id="chip"><option value="0">Καμία</option><option value="1">1</option><option value="5">5</option><option value="10">10</option></select></label>
+    <div class="wallet"><strong id="wallet">100</strong><span> μάρκες</span></div>
+  </div>
+  <details id="history"><summary>Ιστορικό συνεδρίας</summary><div id="historyRows"></div><button class="plain" id="clearSession">Νέα τοπική συνεδρία</button></details>
+</section>
+<aside aria-label="Σεισμολογικές πηγές">
+  <section class="panel">
+    <div class="sidehead"><div><small>ΣΕΙΣΜΟΛΟΓΙΚΟ ΔΙΚΤΥΟ</small><h2>Πηγές του γύρου</h2></div><span class="badge" id="stage">Αναμονή</span></div>
+    <canvas id="map" width="720" height="310" role="img" aria-label="Παγκόσμιος χάρτης σταθμών"></canvas>
+    <p id="telemetryNote" class="muted small"></p>
+    <div id="stationList" class="stations"></div>
+    <details id="connections"><summary>Συνδέσεις και εφεδρείες</summary><div id="attempts"></div></details>
+  </section>
+  <section class="panel method"><small>ΥΠΟΛΟΓΙΣΜΟΣ</small><h2>Από τα δείγματα στον αριθμό</h2><ol id="steps"><li>Δέσμευση χρόνου UTC</li><li>Κάλυψη και σειρά σταθμών</li><li>SHA-256 και επιλογή 0–36</li><li>Δημοσίευση στη λήξη</li></ol><p id="digest" class="muted small"></p><a class="small" id="algorithm" href="#credits">Πλήρης μαθηματικός κανόνας</a></section>
+</aside></div>
+<section class="archive panels-bottom">
+  <div><h2>Ανεξάρτητη επαλήθευση</h2><p>Άνοιξε το JSON ενός γύρου για επανυπολογισμό από miniSEED, ακόμη και εκτός σύνδεσης.</p>
+  <div class="links"><label for="proofFile">Αρχείο JSON</label><input id="proofFile" type="file" accept=".json,application/json"></div><div id="extraProof"></div><p id="proofResult" class="small" role="status"></p></div>
+  <div><h2>Αρχειακό δείγμα</h2><p>Πρώτα 5 s της 23ης Νοεμβρίου 2026 UTC. Η επίδειξη χρησιμοποιεί πραγματικά αρχεία NOA.</p><button class="plain" id="archiveButton">Επανυπολογισμός δείγματος</button> <button class="plain" id="archiveDownload">Λήψη δείγματος JSON</button><p id="archiveResult" class="small" role="status"></p><div id="archiveCharts" class="archive-charts"></div></div>
+</section>
+<details class="archive" id="direct"><summary>Απευθείας δοκιμές από τον browser</summary>
+<p>Ένα αίτημα FDSN ανά έλεγχο από την IP σου. Η μέτρηση αυτή καταγράφει την πρόσβαση της συσκευής σου.</p>
+<div class="links"><button class="plain" id="cors">Δοκιμή HTTPS/CORS και miniSEED</button><button class="plain" id="wss">Έλεγχος EarthScope WSS</button><button class="plain" id="wssOrfeus">Έλεγχος ORFEUS WSS</button></div>
+<p id="transport" role="status" class="small"></p><p id="wssStatus" role="status" class="small"></p></details>
+<footer><span>Δημιουργία · Λυκούργος Κεκεμπάνος — Lyk.Gr · 2026</span><a href="#credits">Πηγές, άδειες και απόρρητο</a></footer>
+<details id="credits"><summary>Πηγές, άδειες και απόρρητο</summary><p>Δωρεάν πείραμα. Οι εικονικές μάρκες δεν έχουν χρηματική αξία. Ψευδώνυμο, μάρκες και ιστορικό αποθηκεύονται τοπικά στον browser.</p><p>Κώδικας GNU AGPL v3 · Πρωτότυπο περιεχόμενο CC BY-SA 4.0 · <a id="source" href="./SEISMO-Phase-4.zip">Πηγαίος κώδικας</a></p><p>Καταγραφές <a href="https://doi.org/10.7914/SN/HL">NOA / HL</a>, <a href="https://doi.org/10.14470/TR560404">GEOFON / GE</a>, <a href="https://doi.org/10.7914/SN/IU">GSN / IU</a>. Χάρτης Natural Earth. Φωτογραφίες <a href="https://commons.wikimedia.org/wiki/File:National_observatory_Athens_Greece.jpg">Jebulon / CC0</a>, <a href="https://commons.wikimedia.org/wiki/File:Dublin_mountains.jpg">Ala Beara / δημόσιος τομέας</a>, <a href="https://commons.wikimedia.org/wiki/File:Blue_Marble_2002.jpg">NASA / δημόσιος τομέας</a>.</p></details>
+</main>
+<script src="/assets/map-data.js"></script>
+<script src="/assets/artifact.js"></script>
+<script src="/assets/mseed.js"></script>
+<script src="/assets/proof.js"></script>
+<script src="/assets/live.js"></script>
+<script src="/assets/main.js"></script>
+</body>
+</html>

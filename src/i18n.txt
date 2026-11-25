@@ -1,0 +1,206 @@
+Σύνδεση|Connecting
+SEISMO αρχική|SEISMO home
+Ο παλμός της Γης|The Pulse of the Earth
+Σεισμορουλέτα|SEISMO
+Αυτή η ρουλέτα δεν γυρίζει απλώς… ΔΟΝΕΙΤΑΙ!|This roulette doesn't just spin… IT SHAKES!
+Εσύ επιλέγεις τον αριθμό. Η Γη δίνει τα δεδομένα. Τα μαθηματικά καθορίζουν το αποτέλεσμα!|You choose the number. Earth provides the data. Mathematics determines the result!
+Γιατί η Γη δεν είναι ακίνητη. Έχει τον δικό της παλμό!|Because Earth is never still. It has a pulse of its own!
+Κατάλογος σταθμών|Station catalog
+Ρουλέτα|Roulette
+ΕΥΡΩΠΑΪΚΗ ΡΟΥΛΕΤΑ|EUROPEAN WHEEL
+37 θέσεις · 0–36|37 pockets · 0–36
+Τροχός ευρωπαϊκής ρουλέτας με 37 αριθμούς|European roulette wheel with 37 numbers
+Άνοιγμα εφαρμογής|Opening application
+Παράθυρο|Window
+Χρόνος γύρου|Round time
+Εφέ περιστροφής|Spin effects
+Απενεργοποίηση όλων|Disable all effects
+Μικροδονήσεις|Microvibrations
+Δόνηση κινητού|Phone vibration
+Ήχος|Sound
+Άνοιγμα stations.txt|Open stations.txt
+Ψευδώνυμο|Nickname
+Προαιρετικό|Optional
+Επιλογή αριθμού|Pick a number
+Εικονική μάρκα|Virtual chip
+Καμία|None
+μάρκες|chips
+Ιστορικό συνεδρίας|Session history
+Νέα τοπική συνεδρία|New local session
+Σεισμολογικές πηγές|Seismic sources
+ΣΕΙΣΜΟΛΟΓΙΚΟ ΔΙΚΤΥΟ|SEISMIC NETWORK
+Πηγές του γύρου|Round sources
+Αναμονή|Waiting
+Παγκόσμιος χάρτης σταθμών|World map of stations
+Συνδέσεις και εφεδρείες|Connections and backups
+ΥΠΟΛΟΓΙΣΜΟΣ|CALCULATION
+Από τα δείγματα στον αριθμό|From samples to a number
+Δέσμευση χρόνου UTC|Lock the UTC window
+Κάλυψη και σειρά σταθμών|Coverage and station priority
+SHA-256 και επιλογή 0–36|SHA-256 and selection 0–36
+Δημοσίευση στη λήξη|Reveal at the deadline
+Πλήρης μαθηματικός κανόνας|Full algorithm
+Ανεξάρτητη επαλήθευση|Independent verification
+Άνοιξε το JSON ενός γύρου για επανυπολογισμό από miniSEED, ακόμη και εκτός σύνδεσης.|Open a round JSON file to recompute from miniSEED, including offline.
+Αρχείο JSON|JSON file
+Αρχειακό δείγμα|Recorded example
+Πρώτα 5 s της 23ης Νοεμβρίου 2026 UTC. Η επίδειξη χρησιμοποιεί πραγματικά αρχεία NOA.|First 5 s of 23 November 2026 UTC. The example uses actual NOA recordings.
+Επανυπολογισμός δείγματος|Recompute example
+Λήψη δείγματος JSON|Download example JSON
+Απευθείας δοκιμές από τον browser|Direct browser diagnostics
+Ένα αίτημα FDSN ανά έλεγχο από την IP σου. Η μέτρηση αυτή καταγράφει την πρόσβαση της συσκευής σου.|One FDSN request per check from your IP address. This tests access from your device.
+Δοκιμή HTTPS/CORS και miniSEED|Test HTTPS/CORS and miniSEED
+Έλεγχος EarthScope WSS|Test EarthScope WSS
+Έλεγχος ORFEUS WSS|Test ORFEUS WSS
+Πηγές, άδειες και απόρρητο|Sources, licenses and privacy
+Δωρεάν πείραμα. Οι εικονικές μάρκες δεν έχουν χρηματική αξία. Ψευδώνυμο, μάρκες και ιστορικό αποθηκεύονται τοπικά στον browser.|Free experiment. Virtual chips have no monetary value. Nickname, chips and history stay in your browser.
+Κώδικας GNU AGPL v3 · Πρωτότυπο περιεχόμενο CC BY-SA 4.0 ·|GNU AGPL v3 code · Original content CC BY-SA 4.0 ·
+Πηγαίος κώδικας|Source code
+Καταγραφές|Recordings
+. Χάρτης Natural Earth. Φωτογραφίες|. Natural Earth map. Photographs
+Ala Beara / δημόσιος τομέας|Ala Beara / public domain
+NASA / δημόσιος τομέας|NASA / public domain
+Ιδέα & δημιουργία: Λυκούργος Κεκεμπάνος|Concept & Creation: Lykourgos Kekempanos
+Με τη συνδρομή της τεχνητής νοημοσύνης GPT.|With the assistance of GPT artificial intelligence.
+Παράκαμψη προς το περιεχόμενο|Skip to content
+Η διαδραστική ρουλέτα χρειάζεται JavaScript. Η περιγραφή και η επιστημονική τεκμηρίωση διαβάζονται παρακάτω.|The interactive wheel requires JavaScript. The introduction and science notes remain readable below.
+Εθνικό Αστεροσκοπείο Αθηνών|National Observatory of Athens
+Περιοχή Δουβλίνου|Dublin area
+Τοπικός γύρος|Local round
+Τοπικός|Local
+Αρχείο|Archive
+Ζωντανός|Live
+Επαλήθευση|Verification
+Αναμονή πηγής|Waiting for the source
+Κυματομορφή|Waveform
+Επ.|Lvl
+ηλικία|age
+λήψη μετά το παράθυρο|delay after window end
+απόκριση|response
+δείγματα γύρου|round samples
+Επιλεγμένοι σταθμοί του γύρου|Selected stations
+Διαδρομές:|Routes:
+Έκδοση|Version
+Εφεδρεία σε χρήση|Backup used
+Επιλέχθηκε|Selected
+Πλήρης υποψήφια|Complete candidate
+δείγματα|samples
+αρχείο παρόχου|provider file
+Αναλυτικό TXT|Detailed TXT
+Αρχείο επαλήθευσης|Verification file
+stations.txt γύρου|Round stations.txt
+Αποτέλεσμα|Result
+Αριθμός αρχείου|Archive number
+Αριθμός|Number
+SHA-256 εισόδου|Input SHA-256
+Τα δεδομένα του δεσμευμένου παραθύρου ήταν ανεπαρκή.|Insufficient data for the locked window.
+Αξιολόγηση κάλυψης|Checking coverage
+Λήψη και εφεδρείες|Fetching and trying backups
+Δεν επαρκούν οι εικονικές μάρκες.|Not enough virtual chips.
+Περιστροφή σε εξέλιξη|Spin in progress
+Λείπουν πρωτογενή miniSEED για|Missing original miniSEED for
+διαδρομές.|routes.
+Λήψη από πάροχο|Download from provider
+Επαληθεύτηκε ο αριθμός|Verified number
+Καταγεγραμμένη λήξη χωρίς απόδειξη κάλυψης.|Recorded timeout without coverage evidence.
+Οι δημοσιευμένες λήψεις δεν επαρκούν.|The published downloads are insufficient.
+CORS και miniSEED OK|CORS and miniSEED OK
+Η απευθείας λήψη δεν ολοκληρώθηκε|Direct download did not complete
+λήξη χωρίς απάντηση|timeout without a reply
+απάντησε ο κατάλογος ροών|stream catalog replied
+αποτυχία σύνδεσης|connection failed
+Μη έγκυρο αρχείο stations.txt.|Invalid stations.txt file.
+Μη έγκυρη ενεργή διαδρομή:|Invalid enabled route:
+Δεν υπάρχουν ενεργές διαδρομές browser.|No browser routes are enabled.
+Έτοιμη|Ready
+διαδρομές browser|browser routes
+Απευθείας από τη συσκευή|Direct from your device
+Το αρχείο ξεπερνά τα 60 MB.|The file exceeds 60 MB.
+Επίλεξε stations.txt για ζωντανό SPIN.|Select stations.txt to enable live spins.
+Αυτόνομο αρχείο|Standalone file
+Επαλήθευση αρχείων|File verification
+Υπέρβαση μεγέθους miniSEED|miniSEED size limit exceeded
+δεν απάντησε στην εντολή|no reply to command
+Σύνδεση WSS|Connecting via WSS
+λήξη σύνδεσης|connection timed out
+κλειστή σύνδεση|connection closed
+χωρίς υποστήριξη SeedLink 4|SeedLink 4 unsupported
+απορρίφθηκε η συνδρομή|subscription rejected
+Συνδρομή SeedLink 4|SeedLink 4 subscription
+Προγραμματισμένη εφεδρεία|Scheduled backup
+Πλήρης λήψη|Complete download
+Μερική κάλυψη|Partial coverage
+Εκτός παραθύρου|Outside window
+Όριο WSS του γύρου|Round WSS limit
+Εκτός διαθέσιμου χρόνου|Out of time
+Σε αναμονή λόγω Retry-After / ορίου παρόχου|Waiting for Retry-After or provider limit
+Αίτημα FDSN|FDSN request
+κανένα δείγμα καναλιού|no samples for this channel
+Λήξη χρόνου|Timed out
+Αποτυχία HTTPS/CORS|HTTPS/CORS failed
+Λιγότεροι από τρεις πλήρεις σταθμοί στο πάγωμα.|Fewer than three complete stations at the cutoff.
+Αθήνα|Athens
+Ιθώμη|Ithomi
+Κοζάνη|Kozani
+Απείρανθος|Apeiranthos
+Ρόδος|Rhodes
+Θεσσαλία|Thessaly
+Δουβλίνο|Dublin
+Ίμπενμπυρεν|Ibbenbüren
+Μόραβια|Moravia
+Σάλτα|Salta
+Βίντχουκ|Windhoek
+Αλμπουκέρκη|Albuquerque
+Ματσουσίρο|Matsushiro
+Ουέλλινγκτον|Wellington
+Ελλάδα|Greece
+Ιρλανδία|Ireland
+Γερμανία|Germany
+Τσεχία|Czechia
+Αργεντινή|Argentina
+Ναμίμπια|Namibia
+ΗΠΑ|United States
+Ιαπωνία|Japan
+Νέα Ζηλανδία|New Zealand
+Νορβηγία|Norway
+Ιταλία|Italy
+Ελβετία|Switzerland
+Ολλανδία|Netherlands
+Γαλλία|France
+Αυστραλία|Australia
+(προσ.)|(approx.)
+Άνοιγμα δεδομένων από τον πάροχο|Fetch data from the provider
+Ελλιπής εγγραφή ακεραίων.|Incomplete integer record.
+Μη υποστηριζόμενη κωδικοποίηση miniSEED 2.|Unsupported miniSEED 2 encoding.
+Ατελές πλαίσιο Steim.|Incomplete Steim frame.
+Μη έγκυρο πλαίσιο Steim.|Invalid Steim frame.
+Ασυμφωνία αποκωδικοποίησης Steim.|Steim decoding mismatch.
+Ελλιπής κεφαλίδα miniSEED.|Incomplete miniSEED header.
+Μη έγκυρη ημερομηνία miniSEED.|Invalid miniSEED timestamp.
+Μη έγκυρο blockette.|Invalid blockette.
+Λανθασμένη αλυσίδα blockette.|Invalid blockette chain.
+Μη υποστηριζόμενη διάταξη ή συχνότητα miniSEED.|Unsupported miniSEED layout or sample rate.
+Κενό miniSEED.|Empty miniSEED.
+Ασυμφωνία καναλιού ή Hz.|Channel or sample rate mismatch.
+Εξαντλήθηκαν οι μετρητές.|Counter range exhausted.
+Άγνωστο αρχείο επαλήθευσης.|Unknown verification file.
+Μη έγκυρη διάρκεια περιστροφής.|Invalid round length.
+Ασυμφωνία χρονικού παραθύρου.|Time window mismatch.
+Ασυμφωνία SHA-256 καταλόγου.|Catalog SHA-256 mismatch.
+Ασυμφωνία έκδοσης καταλόγου.|Catalog version mismatch.
+Ασυμφωνία τύπου απόδειξης ή UTC.|Proof type or UTC mismatch.
+Ελλιπής ή διπλός πίνακας διαδρομών.|Incomplete or duplicate route list.
+Άγνωστη διαδρομή στην απόδειξη.|Unknown route in the proof.
+Ασυμφωνία miniSEED SHA-256.|miniSEED SHA-256 mismatch.
+Ασυμφωνία κάλυψης πηγής.|Source coverage mismatch.
+Ασυμφωνία αποτυπώματος δειγμάτων.|Sample fingerprint mismatch.
+Τρεις πλήρεις διαδρομές σε NO RESULT.|Three complete stations in NO RESULT.
+Ασυμφωνία επιλογής σταθμών.|Station selection mismatch.
+Ασυμφωνία μαθηματικού αποτελέσματος.|Mathematical result mismatch.
+Ηλικία τελευταίου δείγματος|Age of last sample
+Το κουμπί SPIN χρειάζεται ασφαλή σύνδεση HTTPS ή localhost.|SPIN requires a secure HTTPS connection or localhost.
+Φόρτωση αρχειακού δείγματος|Loading recorded example
+Αποτυχία λήψης αρχειακού δείγματος.|Could not load the recorded example.
+Άνοιγμα πρωτογενούς miniSEED:|Open original miniSEED:
+
+Γλώσσα|Language
