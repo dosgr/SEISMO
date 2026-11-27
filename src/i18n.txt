@@ -250,3 +250,30 @@ CORS και miniSEED OK|CORS and miniSEED OK
 Βόρεια Ρηνανία-Βεστφαλία|North Rhine-Westphalia
 Περιφέρεια Χόμας|Khomas Region
 Η AGPL v3 αφορά τον πηγαίο κώδικα. Η CC BY-SA 4.0 αφορά το περιεχόμενο που φέρει αυτή την άδεια. Τα σεισμολογικά δεδομένα τρίτων διατίθενται με τους όρους και τις αναφορές του αντίστοιχου δικτύου και παρόχου.|AGPL v3 applies to source code. CC BY-SA 4.0 applies to content released under that license. Third-party seismic data follow the terms and attribution of each network and provider.
+Υποστήριξη και επαγγελματικές υπηρεσίες|Support and professional services
+Στηρίξτε τη δημιουργικότητα|Support Creativity
+Υποστηρίξτε προαιρετικά τις επόμενες δωρεάν δημιουργίες μου.|Voluntarily support my future free creations.
+Αναζητάτε τεχνολογικές λύσεις;|Looking for Technology Solutions?
+Επαγγελματικές τεχνολογικές λύσεις από το 1996|Professional Technology Solutions Since 1996
+Τηλεοπτικό & Ραδιοφωνικό Streaming · Διαχείριση & βελτιστοποίηση διακομιστών · Μελέτη & βελτιστοποίηση ιστοτόπων και streaming υπερυψηλής επισκεψιμότητας · Τεχνική υποστήριξη · Ανάπτυξη εξατομικευμένων εφαρμογών & λύσεων AI|TV & Radio Streaming · Server Management & Optimization · Ultra-High-Traffic Website & Streaming Architecture and Optimization · Technical Support · Custom-Made Applications & AI Solutions
+Επιλογές προαιρετικής υποστήριξης|Optional Support Options
+Κρυπτονόμισμα|Cryptocurrency
+Αντιγραφή διεύθυνσης|Copy address
+Η διεύθυνση αντιγράφηκε.|Address copied.
+Δεν έγινε αντιγραφή. Επιλέξτε και αντιγράψτε τη διεύθυνση χειροκίνητα.|Could not copy. Select and copy the address manually.
+Εφάπαξ υποστήριξη|One-time support
+Μετάβαση στο Revolut|Open Revolut
+Μετάβαση στο PayPal|Open PayPal
+Μηνιαία συνδρομή|Monthly subscription
+Η χρέωση επαναλαμβάνεται κάθε μήνα μέσω Facebook.|Billing recurs monthly through Facebook.
+Εγγραφή στο Facebook|Subscribe on Facebook
+Κωδικός QR Bitcoin|Bitcoin QR code
+Κωδικός QR Revolut|Revolut QR code
+Κωδικός QR PayPal|PayPal QR code
+Κωδικός QR Facebook Subscription|Facebook Subscription QR code
+Άνοιγμα dos.gr σε νέα καρτέλα|Open dos.gr in a new tab
+Μετάβαση στο Revolut σε νέα καρτέλα|Open Revolut in a new tab
+Μετάβαση στο PayPal σε νέα καρτέλα|Open PayPal in a new tab
+Άνοιγμα μηνιαίας συνδρομής Facebook σε νέα καρτέλα|Open the monthly Facebook subscription in a new tab
+Εμφάνιση ή απόκρυψη των επιλογών υποστήριξης|Show or hide support options
+Η υποστήριξη είναι απολύτως προαιρετική. Η εφαρμογή παραμένει ελεύθερη, δωρεάν και ανοιχτού κώδικα για όλους. Η υποστήριξή σας δεν επηρεάζει τη λειτουργία ή τα αποτελέσματα της εφαρμογής.|Support is entirely optional. The application remains free and open source for everyone. Your support does not affect the operation or results of the application.

@@ -9,6 +9,8 @@ from xml.etree import ElementTree as ET
 from lxml import html
 from artwork import render
 
+VERSION = "1.1.1"
+
 HERE=Path(__file__).resolve().parent
 SRC=HERE/'src'
 OUT=HERE/'dist/seismo'
@@ -19,7 +21,7 @@ if not PATH.startswith('/') or not PATH.endswith('/') or '..' in PATH:
 if urlsplit(CONFIG['origin']).scheme!='https' or urlsplit(CONFIG['origin']).path not in ('','/'):
     raise ValueError('origin must be an HTTPS origin')
 ROOT=CONFIG['origin'].rstrip('/')+PATH
-js=['translations.js','map-data.js','mseed.js','proof.js','live.js','i18n.js','main.js']
+js=['translations.js','map-data.js','mseed.js','proof.js','live.js','i18n.js','main.js','donate.js']
 phrases=dict(line.split('|',1) for line in (SRC/'i18n.txt').read_text().splitlines() if line.strip())
 science=json.loads((SRC/'content.json').read_text())
 for el,en,eld,end in science:
@@ -100,8 +102,9 @@ def head(lang,prefix,standalone):
         [f'<link rel="apple-touch-icon" href="{prefix}favicons/apple-touch-icon.png" sizes="180x180">'] if not standalone else []),
       ('WEB APP MANIFEST & MOBILE',['<meta name="theme-color" content="#091514">']+
         ([] if standalone else [f'<link rel="manifest" href="{prefix}manifest'+('-en' if lang=='en' else '')+'.json">'])),
-      ('EXTERNAL STYLE FILES',[f'<link rel="stylesheet" href="{prefix}css/style.css">'] if not standalone else []),
-      ('INTERNAL CSS',['<style>\n'+(SRC/'style.css').read_text()+'\n</style>'] if standalone else []),
+      ('EXTERNAL STYLE FILES',[f'<link rel="stylesheet" href="{prefix}css/style.css">',
+                               f'<link rel="stylesheet" href="{prefix}css/donate.css">'] if not standalone else []),
+      ('INTERNAL CSS',['<style>\n'+(SRC/'style.css').read_text()+'\n'+(SRC/'donate.css').read_text()+'\n</style>'] if standalone else []),
       ('STRUCTURED DATA — SCHEMA.ORG JSON-LD',['<script type="application/ld+json" id="schema">\n'+json.dumps(p["schema"],ensure_ascii=False,indent=2)+'\n</script>'] if not standalone else []),
       ('ACCESSIBILITY',['<meta name="color-scheme" content="dark">','<!-- See the skip link, live regions and keyboard-friendly native controls. -->']),
       ('PROJECT CONFIGURATION & SECURITY',['<!-- Scripts are deferred. The live catalog is external and shared between languages. -->']+
@@ -150,7 +153,7 @@ def body(lang,prefix,standalone):
     closure=value.index('</details>',value.index('id="credits"'))
     value=value[:closure]+('<p>Η AGPL v3 αφορά τον πηγαίο κώδικα. Η CC BY-SA 4.0 αφορά το περιεχόμενο που φέρει αυτή την άδεια. Τα σεισμολογικά δεδομένα τρίτων διατίθενται με τους όρους και τις αναφορές του αντίστοιχου δικτύου και παρόχου.</p>'
        '<p><a href="https://doi.org/10.7914/SN/HT">ΑΠΘ / HT</a> · <a href="https://doi.org/10.15778/RESIF.CL">Κορινθιακός / CL</a> · <a href="https://service.earthscope.org/fdsnws/">EarthScope FDSN</a>.</p>'
-       '</div></details>'+footer)+value[closure+len('</details>'):]
+       '</div></details>'+(SRC/'donate.html').read_text()+footer)+value[closure+len('</details>'):]
     hostPrefix=ROOT if standalone else prefix
     value=value.replace('href="./stations.txt"',f'href="{hostPrefix}stations.txt"')
     value=value.replace('href="./SEISMO-Phase-4.zip"',f'href="{hostPrefix}SEISMO-source.zip"')
@@ -168,7 +171,10 @@ def body(lang,prefix,standalone):
         if node.tag=='a' and (node.get('href') or '').startswith('https://') and not node.get('data-lang'):
             node.set('target','_blank')
             node.set('rel','noopener noreferrer')
-        for attr,kind in [('aria-label','label'),('placeholder','placeholder')]:
+        attributes=[('aria-label','label'),('placeholder','placeholder')]
+        if node.get('id')=='support-area' or any(parent.get('id')=='support-area' for parent in node.iterancestors()):
+            attributes.extend([('alt','alt'),('title','title')])
+        for attr,kind in attributes:
             raw=node.get(attr)
             if lookup(raw):
                 node.set(f'data-{kind}-el',raw)
@@ -202,8 +208,10 @@ def page(lang,standalone=False):
         scripts.append('window.SEISMO_ARTIFACT='+json.dumps(embedded,ensure_ascii=False)+';\nwindow.SEISMO_IMAGES='+json.dumps(images)+';')
         scripts+=((OUT/'js'/name).read_text() for name in js)
         scripts=['<script>\n'+s.replace('</script','<\\/script')+'\n</script>' for s in scripts]
+        scripts.insert(0,f'<script src="{prefix}donate-config.js"></script>')
     else:
-        scripts=[f'<script src="{prefix}js/{name}" defer></script>' for name in js]
+        scripts=[f'<script src="{prefix}donate-config.js" defer></script>']
+        scripts.extend(f'<script src="{prefix}js/{name}" defer></script>' for name in js)
     return f'<!doctype html>\n<html lang="{lang}" dir="ltr">\n<head>\n'+head(lang,prefix,standalone)+f'\n</head>\n<body data-root="{prefix}" data-standalone="{str(standalone).lower()}">\n'+body(lang,prefix,standalone)+'\n'+'\n'.join(scripts)+'\n</body>\n</html>\n'
 
 def main():
@@ -215,7 +223,10 @@ def main():
     for name in ('athens.jpg','ireland.jpg','earth.jpg'):shutil.copyfile(SRC/name,OUT/'images'/name)
     shutil.copyfile(HERE/'evidence/archive-proof.json',OUT/'data/archive-proof.json')
     for name in js[1:]:shutil.copyfile(SRC/name,OUT/'js'/name)
-    shutil.copyfile(SRC/'style.css',OUT/'css/style.css')
+    for name in ('style.css','donate.css'):
+        shutil.copyfile(SRC/name,OUT/'css'/name)
+    shutil.copyfile(HERE/'donate-config.js',OUT/'donate-config.js')
+    shutil.copytree(HERE/'assets/support/logos',OUT/'assets/support/logos',dirs_exist_ok=True)
     (OUT/'js/translations.js').write_text('window.SEISMO_LOCALE = '+json.dumps({'phrases':phrases,'pages':PAGES},ensure_ascii=False,indent=2)+';\n')
     for lang,entry in [('el',OUT/'index.html'),('en',OUT/'en/index.html')]:
         entry.write_text(page(lang))
@@ -226,7 +237,7 @@ def main():
                    {'src':f'favicons/favicon-{n}.png','sizes':f'{n}x{n}','type':'image/png','purpose':'any'} for n in (192,512)]+[
                    {'src':'favicons/maskable-512.png','sizes':'512x512','type':'image/png','purpose':'maskable'}]}
         (OUT/filename).write_text(json.dumps(props,ensure_ascii=False,indent=2)+'\n')
-    (HERE/'SEISMO-v1.1.0-preview.html').write_text(page('el',True))
+    (HERE/f'SEISMO-v{VERSION}-preview.html').write_text(page('el',True))
     (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+''.join(
       '  <url>\n    <loc>'+p['canonical']+'</loc>\n'+''.join(f'    <xhtml:link rel="alternate" hreflang="{lang}" href="{target}"/>\n' for lang,target in [('el',ROOT),('en',ROOT+'en/'),('x-default',ROOT)])+'  </url>\n'
       for p in PAGES.values())+'</urlset>\n')

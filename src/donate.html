@@ -1,0 +1,61 @@
+<section class="support-area" aria-label="Υποστήριξη και επαγγελματικές υπηρεσίες" id="support-area">
+  <div class="support-intro">
+    <article class="support-card" id="support-card" hidden>
+      <svg class="support-icon heart-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19.5 12.572 12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/>
+        <path d="M12 6 8.707 9.293a1 1 0 0 0 0 1.414l.543.543c.69.69 1.81.69 2.5 0l1-1a2 2 0 0 1 2.828 0l1.75 1.75M12.5 15.5l2 2M15 13l2 2"/>
+      </svg>
+      <h2>Στηρίξτε τη δημιουργικότητα</h2>
+      <p>Υποστηρίξτε προαιρετικά τις επόμενες δωρεάν δημιουργίες μου.</p>
+      <button type="button" id="support-donate" title="Εμφάνιση ή απόκρυψη των επιλογών υποστήριξης" class="support-action donate-action" aria-expanded="false" aria-controls="support-panel">♥ Donate</button>
+    </article>
+    <article class="support-card" id="professional-card">
+      <svg class="support-icon code-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m18 16 4-4-4-4M6 8l-4 4 4 4m8.5-12-5 16"/>
+      </svg>
+      <h2>Αναζητάτε τεχνολογικές λύσεις;</h2>
+      <p class="support-subtitle">Επαγγελματικές τεχνολογικές λύσεις από το 1996</p>
+      <p>Τηλεοπτικό &amp; Ραδιοφωνικό Streaming · Διαχείριση &amp; βελτιστοποίηση διακομιστών · Μελέτη &amp; βελτιστοποίηση ιστοτόπων και streaming υπερυψηλής επισκεψιμότητας · Τεχνική υποστήριξη · Ανάπτυξη εξατομικευμένων εφαρμογών &amp; λύσεων AI</p>
+      <a href="https://dos.gr/" aria-label="Άνοιγμα dos.gr σε νέα καρτέλα" class="support-action professional-action">🌐 dos.gr</a>
+    </article>
+  </div>
+  <div class="support-disclosure" id="support-disclosure" hidden>
+    <button class="support-toggle" type="button" id="support-toggle" aria-expanded="false" aria-controls="support-panel">
+      <span class="support-chevron" aria-hidden="true"></span><span>Επιλογές προαιρετικής υποστήριξης</span>
+    </button>
+    <div class="support-panel" id="support-panel" role="region" aria-labelledby="support-toggle" inert>
+      <div class="support-clip">
+        <div class="support-methods">
+          <article data-method="bitcoin" class="support-method" hidden>
+            <h3><img data-logo="bitcoin.svg" alt="" width="26" height="26">Bitcoin (BTC)</h3>
+            <p>Κρυπτονόμισμα</p>
+            <img class="support-qr" width="128" height="128" alt="Κωδικός QR Bitcoin">
+            <code id="support-address" dir="ltr"></code>
+            <button type="button" class="support-action support-method-action" id="support-copy">Αντιγραφή διεύθυνσης</button>
+            <p id="support-copy-status" role="status"></p>
+          </article>
+          <article data-method="revolut" class="support-method" hidden>
+            <h3><img data-logo="revolut.png" alt="" width="26" height="26">Revolut</h3>
+            <p>Εφάπαξ υποστήριξη</p>
+            <img class="support-qr" width="128" height="128" alt="Κωδικός QR Revolut">
+            <a class="support-action support-method-action" target="_blank" rel="noopener noreferrer" aria-label="Μετάβαση στο Revolut σε νέα καρτέλα">Μετάβαση στο Revolut</a>
+          </article>
+          <article data-method="paypal" class="support-method" hidden>
+            <h3><img data-logo="paypal.png" alt="" width="26" height="26">PayPal</h3>
+            <p>Εφάπαξ υποστήριξη</p>
+            <img class="support-qr" width="128" height="128" alt="Κωδικός QR PayPal">
+            <a class="support-action support-method-action" target="_blank" rel="noopener noreferrer" aria-label="Μετάβαση στο PayPal σε νέα καρτέλα">Μετάβαση στο PayPal</a>
+          </article>
+          <article data-method="facebook" class="support-method" hidden>
+            <h3><img data-logo="facebook.svg" alt="" width="26" height="26">Facebook Subscription</h3>
+            <p>Μηνιαία συνδρομή</p>
+            <img class="support-qr" width="128" height="128" alt="Κωδικός QR Facebook Subscription">
+            <p>Η χρέωση επαναλαμβάνεται κάθε μήνα μέσω Facebook.</p>
+            <a class="support-action support-method-action" target="_blank" rel="noopener noreferrer" aria-label="Άνοιγμα μηνιαίας συνδρομής Facebook σε νέα καρτέλα">Εγγραφή στο Facebook</a>
+          </article>
+        </div>
+        <p class="support-note">Η υποστήριξη είναι απολύτως προαιρετική. Η εφαρμογή παραμένει ελεύθερη, δωρεάν και ανοιχτού κώδικα για όλους. Η υποστήριξή σας δεν επηρεάζει τη λειτουργία ή τα αποτελέσματα της εφαρμογής.</p>
+      </div>
+    </div>
+  </div>
+</section>
