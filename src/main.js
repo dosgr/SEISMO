@@ -132,7 +132,10 @@ function map(rows,selected=[]){
     if(chosen){c.strokeStyle="#f4fff7";c.lineWidth=2;c.stroke();}
   }
 }
-function stationCard(st,progress){
+function stationFlag(code){
+  return /^[A-Z]{2}$/.test(code||"")?String.fromCodePoint(...[...code].map(c=>127397+c.charCodeAt(0)))+" ":"";
+}
+function stationCard(st,progress,duration=round?.duration){
   const box=node("div","station"),head=node("div","station-head"), text=node("div");
   const photo=placeImage[st.id];
   if(photo){
@@ -141,7 +144,9 @@ function stationCard(st,progress){
   const a=node("a","",st.name+" · "+st.id);
   a.href="https://www.openstreetmap.org/?mlat="+st.lat+"&mlon="+st.lon+"#map=12/"+st.lat+"/"+st.lon;
   a.rel="noopener noreferrer";a.target="_blank";
-  text.append(a,node("span","",st.country+" · "+st.hz+" Hz · "+st.provider+" · "+st.protocol));
+    const site=[stationFlag(st.country_code)+st.country,st.region!==st.country?st.region:null,st.hz+" Hz"].filter(Boolean);
+  const provider=[st.provider_label||st.provider,st.provider_country,st.protocol].filter(Boolean);
+  text.append(a,node("span","",site.join(" · ")),node("span","","Πάροχος "+provider.join(" · ")));
   head.append(text,node("span","level","Επ. "+st.level));box.append(head);
   const live=telemetry.live?.[st.key],values=progress?.wave||live?.values;
   if(values?.length){
@@ -156,7 +161,8 @@ function stationCard(st,progress){
   if(progress?.sample_age_ms!=null)parts.push("Ηλικία τελευταίου δείγματος "+(progress.sample_age_ms/1000).toFixed(2)+" s");
   if(progress?.window_delay_ms!=null)parts.push("λήψη μετά το παράθυρο "+(progress.window_delay_ms/1000).toFixed(2)+" s");
   if(status.response_ms!=null)parts.push("απόκριση "+status.response_ms+" ms");
-  if(progress?.values_in_window)parts.push(progress.values_in_window+" δείγματα γύρου");
+  if(progress?.last_sample_utc)parts.push("Τελευταίο δείγμα "+progress.last_sample_utc);
+  if(progress&&duration)parts.push((progress.values_in_window||0)+"/"+(st.hz*duration)+" δείγματα");
   box.append(node("p","wave-empty",parts.join(" · ")));
   return box;
 }
@@ -180,9 +186,10 @@ function sources(r=round){
     const selection=r?.used?.includes(item.key)?(st?.level>1?"Εφεδρεία σε χρήση":"Επιλέχθηκε"):item.complete?"Πλήρης υποψήφια":"";
     const right=node("b",item.complete?"good":"",[
       status.state||"Αναμονή",status.response_ms!=null?status.response_ms+" ms":"",
+      status.request_after_window_ms!=null?"Αποστολή μετά το παράθυρο "+(status.request_after_window_ms/1000).toFixed(2)+" s":"",
       item.arrival_ms?new Date(item.arrival_ms).toISOString():"",
       item.sample_age_ms!=null?"Ηλικία τελευταίου δείγματος "+(item.sample_age_ms/1000).toFixed(2)+" s":"",
-      item.values_in_window?item.values_in_window+" δείγματα":"",selection].filter(Boolean).join(" · "));
+      r?.duration&&st?(item.values_in_window||0)+"/"+(st.hz*r.duration)+" δείγματα":"",selection].filter(Boolean).join(" · "));
     if(item.record_sha256 && r?.mode==="server"){
       const a=node("a",""," miniSEED");a.href=new URL("api/round/"+r.id+"/raw/"+item.record_sha256,SeismoLocale.root);right.append(a);
     }
@@ -260,6 +267,12 @@ function finish(r,saveHistory=true){
   $("duration").disabled=false;$("spinLength").disabled=false;
   $("stage").textContent=r.state==="RESULT"?"Αποτέλεσμα":"NO RESULT";
   $("output").className="output "+(r.state==="RESULT"?"win":"void");
+  const greek=r.used?.filter(k=>config?.stations.find(st=>st.key===k)?.country_code==="GR").length||0;
+  const badge=$("outcome");
+  badge.hidden=false;
+  badge.className="outcome "+(r.state!=="RESULT"?"outcome-none":greek===3?"outcome-local":greek?"outcome-mixed":"outcome-global");
+  badge.textContent=r.state!=="RESULT"?"NO RESULT · Ελλιπής κάλυψη":greek===3?
+    "🇬🇷 Ελληνικό αποτέλεσμα":greek?"🇬🇷🌍 Μικτό αποτέλεσμα":"🌍 Διεθνές αποτέλεσμα";
   if(r.state==="RESULT"){
     angle=-order.indexOf(r.number)*slices;ball=-Math.PI/2;wheelDraw(r.number);
     $("output").textContent="Αριθμός "+r.number;
@@ -299,11 +312,11 @@ async function spin(){
   const r={id:crypto.randomUUID().replaceAll("-",""),mode:"browser",algorithm:"SEISMO-P4",duration,
      spin_seconds:spinSeconds,accepted_ms:now,start_ms:start,start_utc:new Date(start).toISOString(),
      end_utc:new Date(start+duration*1000).toISOString(),reveal_ms:reveal,freeze_ms:reveal-2000,
-     catalog_version:config.version,catalog_sha256:config.sha256};
+     catalog_version:config.version,catalog_sha256:config.sha256,network_policy:SeismoLive.policy};
   round=r;intensity=0;ongoing=true;$("spin").disabled=true;
   $("duration").disabled=true;$("spinLength").disabled=true;
   $("timer").textContent=spinSeconds;$("output").className="output";
-  $("output").textContent="Περιστροφή σε εξέλιξη";$("digest").textContent="";
+  $("output").textContent="Περιστροφή σε εξέλιξη";$("digest").textContent="";$("outcome").hidden=true;
   stages(0);links(r);sources(r);$("connections").open=true;
   local.pending={id:r.id,value:stake,pick,mode:r.mode,when:r.reveal_ms,start_utc:r.start_utc};
   local.balance-=stake;save();wallet();
@@ -347,9 +360,7 @@ async function cors(){
     const r=archive.round;
     const line=r.routes[0];
     const st=SeismoProof.parseCatalog(archive.stations_txt).rows.find(x=>x.key===line.key);
-    const [network,station,loc,channel]=st.id.split(".");
-    const q=new URLSearchParams({network,station,location:loc||"--",channel,starttime:r.start_utc,endtime:r.end_utc});
-    const t=performance.now(),res=await fetch(st.url+"?"+q,{mode:"cors",signal:AbortSignal.timeout(8000),credentials:"omit",referrerPolicy:"no-referrer"});
+    const t=performance.now(),res=await fetch(SeismoLive.queryURL([st],r),{mode:"cors",signal:AbortSignal.timeout(8000),credentials:"omit",referrerPolicy:"no-referrer"});
     if(res.status!==200)throw Error("HTTP "+res.status);
     const bytes=new Uint8Array(await res.arrayBuffer());
     const clip=SeismoMseed.windowSamples(bytes,st,r.start_ms,r.duration);
@@ -430,7 +441,7 @@ async function init(){
         const st=cfg.rows.find(x=>x.key===item.key);
         const raw=SeismoProof.fromBase64(b.records[item.record_sha256]);
         const values=SeismoMseed.windowSamples(raw,st,r.start_ms,r.duration).values;
-        return stationCard(st,{wave:Array.from(values),status:{state:"Αρχείο "+r.start_utc}});
+        return stationCard(st,{wave:Array.from(values),values_in_window:values.length,status:{state:"Αρχείο "+r.start_utc}},r.duration);
       }));
     }catch(e){$("archiveResult").textContent=e.message;}
   };

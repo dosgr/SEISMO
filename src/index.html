@@ -17,7 +17,8 @@
   <div class="wheel-wrap"><canvas id="wheel" width="790" height="790" aria-label="Τροχός ευρωπαϊκής ρουλέτας με 37 αριθμούς" role="img"></canvas><div class="needle"></div></div>
   <div class="wheel-bottom">
     <div id="output" class="output" role="status">Άνοιγμα εφαρμογής</div>
-    <div class="spin-controls"><label for="duration">Παράθυρο</label><select id="duration"><option value="1">1 s</option><option value="3">3 s</option><option value="5">5 s</option><option value="10">10 s</option></select><label for="spinLength">Χρόνος γύρου</label><select id="spinLength"><option>20</option><option>30</option><option>45</option><option>60</option></select><button id="spin" type="button" disabled>SPIN <span id="spinLabel">20 s</span></button></div>
+    <div id="outcome" class="outcome" aria-live="polite" hidden></div>
+    <div class="spin-controls"><label for="duration">Παράθυρο</label><select id="duration"><option value="1">1 s</option><option value="3">3 s</option><option value="5">5 s</option><option value="10">10 s</option></select><label for="spinLength">Χρόνος γύρου</label><select id="spinLength"><option>20</option><option>30</option><option>45</option><option>60</option><option>330</option></select><button id="spin" type="button" disabled>SPIN <span id="spinLabel">20 s</span></button></div>
     <p id="roundlink" class="muted small"></p>
     <div id="roundActions" class="links"></div>
     <details id="effects"><summary>Εφέ περιστροφής</summary><div class="links effect-options">
