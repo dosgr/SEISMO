@@ -43,6 +43,10 @@ const SeismoLocale=(()=>{
       if(element.dataset.labelEl)element.setAttribute("aria-label",element.dataset[lang==="en"?"labelEn":"labelEl"]);
       if(element.dataset.placeholderEl)element.placeholder=element.dataset[lang==="en"?"placeholderEn":"placeholderEl"];
     }
+    for(const attribute of ["alt","title"]){
+      for(const element of document.querySelectorAll(`#support-area [data-${attribute}-el]`))
+        element.setAttribute(attribute,element.getAttribute(`data-${attribute}-${lang}`));
+    }
     for(const element of document.querySelectorAll(dynamicSelector))renderDynamic(element);
     const page=pages[lang];
     document.title=page.title;
