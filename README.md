@@ -19,6 +19,12 @@ SEISMO is a free, open-source experiment that connects seismology, mathematics, 
 - Greek and English pages share the same calculation. A round export records the catalog fingerprint, sample evidence, and result.
 - Chips are virtual. There are no payments, subscriptions, monetary bets, or prizes.
 
+## Release v1.1.0
+
+Greek First – Global Fallback prioritizes physical stations in Greece via EarthScope and EPOS France. SCEDC and international EarthScope offer short-round fallback, while GEOFON remains available in the 330-second diagnostics. The UI shows the station's country separately from its provider, UTC sample age, response time, and coverage. In the November 27, 2026 browser session, all five 20-second rounds completed with Greek data. The selected samples were 6.93–10.32 seconds old on receipt. See the [algorithm and verification notes](docs/ALGORITHM.md) and the [installation guide](docs/INSTALL.md).
+
+[Official repository](https://github.com/dosgr/SEISMO) · [(ↄ) Copyleft](https://en.wikipedia.org/wiki/Copyleft)
+
 ## Use and verify
 
 | Guide | English | Ελληνικά |
@@ -31,6 +37,8 @@ SEISMO is a free, open-source experiment that connects seismology, mathematics, 
 **Idea & Creation** — Lykourgos Kekempanos | [Lyk.Gr](https://lyk.gr/)  
 With the assistance of GPT artificial intelligence.  
 Copyleft 2026 — AGPL v3 / CC BY-SA 4.0.
+
+[Download the production ZIP](https://github.com/dosgr/SEISMO/releases/download/v1.1.0/SEISMO-v1.1.0-cPanel.zip) · [Phase 9 measurements and provider limits](docs/PHASE-9.el.md)
 
 ## Browser interface
 

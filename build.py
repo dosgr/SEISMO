@@ -77,7 +77,7 @@ def head(lang,prefix,standalone):
     blocks=[
       ('BASIC BROWSER & LANGUAGE SETTINGS',['<meta charset="utf-8">','<meta name="viewport" content="width=device-width, initial-scale=1">',f'<title>{e(p["title"])}</title>']),
       ('SEO & SEARCH ENGINES',[meta('description','description'),meta('author','author'),
-        '<meta name="robots" content="'+('noindex, follow' if standalone else 'index, follow, max-image-preview:large')+'">']+
+        '<meta name="robots" content="index, follow">']+
         ([] if standalone else [
         f'<link rel="canonical" href="{p["canonical"]}">',f'<link rel="alternate" hreflang="el" href="{ROOT}">',
         f'<link rel="alternate" hreflang="en" href="{ROOT}en/">',f'<link rel="alternate" hreflang="x-default" href="{ROOT}">'])+
@@ -131,20 +131,33 @@ def body(lang,prefix,standalone):
     sections=[]
     for i,(el,en,eld,end) in enumerate(science):
         sections.append(f'<{"h2" if i==0 else "h3"}>{escape(el)}</{"h2" if i==0 else "h3"}><p>{escape(eld)}</p>')
-    content='<section class="science"><article>'+sections[0]+'<details open><summary>Συχνές ερωτήσεις και επιστημονική τεκμηρίωση</summary>'+''.join(sections[1:])+'</details></article></section>'
+    content=('<section class="science" aria-label="Σχετικά με το SEISMO">'
+             '<details class="archive info-section" id="experiment"><summary>Το πείραμα</summary><div class="section-copy">'
+             +sections[0].split('</h2>',1)[1]+'</div></details>'
+             '<details class="archive info-section" id="questions"><summary>Συχνές ερωτήσεις και επιστημονική τεκμηρίωση</summary>'
+             '<div class="section-copy">'+''.join(sections[1:])+'</div></details></section>')
     start=value.index('<footer>')
     end=value.index('</footer>',start)+len('</footer>')
-    footer=f'''<footer><div><p><span>Ιδέα &amp; δημιουργία: Λυκούργος Κεκεμπάνος</span> | <a href="{CONFIG['creator_url']}">Lyk.Gr</a></p>
+    footer=f'''<footer class="site-footer">
+<p><span>Ιδέα &amp; δημιουργία: Λυκούργος Κεκεμπάνος</span> | <a href="{CONFIG['creator_url']}">Lyk.Gr</a></p>
 <p>Με τη συνδρομή της τεχνητής νοημοσύνης GPT.</p>
-<p>Copyleft 2026 — <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPL v3</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p></div><a href="#credits">Πηγές, άδειες και απόρρητο</a></footer>'''
-    value=value[:start]+content+footer+value[end:]
+<p>(ↄ) <a href="https://en.wikipedia.org/wiki/Copyleft">Copyleft</a> 2026–27 — <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPL v3</a> / Λυκ · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+<p><span aria-hidden="true">🔗</span> <a href="https://github.com/dosgr/SEISMO">https://github.com/dosgr/SEISMO</a></p>
+</footer>'''
+    value=value[:start]+content+value[end:]
+    value=value.replace('<details id="credits">','<details class="archive info-section" id="credits">')
+    value=value.replace('<summary>Πηγές, άδειες και απόρρητο</summary>','<summary>Πηγές, άδειες και απόρρητο</summary><div class="section-copy">',1)
+    closure=value.index('</details>',value.index('id="credits"'))
+    value=value[:closure]+('<p>Η AGPL v3 αφορά τον πηγαίο κώδικα. Η CC BY-SA 4.0 αφορά το περιεχόμενο που φέρει αυτή την άδεια. Τα σεισμολογικά δεδομένα τρίτων διατίθενται με τους όρους και τις αναφορές του αντίστοιχου δικτύου και παρόχου.</p>'
+       '<p><a href="https://doi.org/10.7914/SN/HT">ΑΠΘ / HT</a> · <a href="https://doi.org/10.15778/RESIF.CL">Κορινθιακός / CL</a> · <a href="https://service.earthscope.org/fdsnws/">EarthScope FDSN</a>.</p>'
+       '</div></details>'+footer)+value[closure+len('</details>'):]
     hostPrefix=ROOT if standalone else prefix
     value=value.replace('href="./stations.txt"',f'href="{hostPrefix}stations.txt"')
     value=value.replace('href="./SEISMO-Phase-4.zip"',f'href="{hostPrefix}SEISMO-source.zip"')
     value=value.replace('id="algorithm" href="#credits"',f'id="algorithm" href="{hostPrefix}ALGORITHM.md"')
     value=value.replace('>GSN / IU</a>.','>GSN / IU</a>, <a href="https://doi.org/10.7914/SN/CI">SCSN / CI</a>.')
     tree=html.fragment_fromstring(value,create_parent='div')
-    dynamic={'mode','output','digest','stage','roundlink','roundActions','historyRows','attempts','telemetryNote','stationList','archiveCharts','archiveResult','proofResult','extraProof','transport','wssStatus'}
+    dynamic={'outcome','mode','output','digest','stage','roundlink','roundActions','historyRows','attempts','telemetryNote','stationList','archiveCharts','archiveResult','proofResult','extraProof','transport','wssStatus'}
     def lookup(text): return phrases.get((text or '').strip())
     def span(raw):
         rendered=html.Element('span',{'data-el':raw.strip(),'data-en':lookup(raw)})
@@ -152,6 +165,9 @@ def body(lang,prefix,standalone):
         return rendered
     for node in list(tree.iter()):
         if node.get('data-lang')==lang:node.set('aria-current','page')
+        if node.tag=='a' and (node.get('href') or '').startswith('https://') and not node.get('data-lang'):
+            node.set('target','_blank')
+            node.set('rel','noopener noreferrer')
         for attr,kind in [('aria-label','label'),('placeholder','placeholder')]:
             raw=node.get(attr)
             if lookup(raw):
@@ -210,7 +226,7 @@ def main():
                    {'src':f'favicons/favicon-{n}.png','sizes':f'{n}x{n}','type':'image/png','purpose':'any'} for n in (192,512)]+[
                    {'src':'favicons/maskable-512.png','sizes':'512x512','type':'image/png','purpose':'maskable'}]}
         (OUT/filename).write_text(json.dumps(props,ensure_ascii=False,indent=2)+'\n')
-    (HERE/'SEISMO-Phase-5-preview.html').write_text(page('el',True))
+    (HERE/'SEISMO-v1.1.0-preview.html').write_text(page('el',True))
     (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+''.join(
       '  <url>\n    <loc>'+p['canonical']+'</loc>\n'+''.join(f'    <xhtml:link rel="alternate" hreflang="{lang}" href="{target}"/>\n' for lang,target in [('el',ROOT),('en',ROOT+'en/'),('x-default',ROOT)])+'  </url>\n'
       for p in PAGES.values())+'</urlset>\n')
