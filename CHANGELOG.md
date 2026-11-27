@@ -1,4 +1,9 @@
 # Changelog / Ιστορικό εκδόσεων
+## 1.1.1 — Υποστήριξη και επαγγελματικές υπηρεσίες / Support & Professional Services
+
+- Δίγλωσσο επαγγελματικό πλαίσιο dos.gr και αναδιπλούμενες επιλογές προαιρετικής υποστήριξης.
+- Κοινές ρυθμίσεις ανά μέθοδο. Η δημόσια έκδοση περιέχει κενές διευθύνσεις, με τις πληρωμές αρχικά απενεργοποιημένες.
+- Adds the bilingual dos.gr services card and optional support disclosure, with independent config flags. Public defaults have payments disabled and no payment destinations.
 
 ## 1.1.0 — Φάση 9 / Phase 9
 
