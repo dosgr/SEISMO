@@ -38,7 +38,7 @@ const SeismoProof=(()=>{
     const out=[],stations=new Set();
     const ordered=[...rows].sort((a,b)=>a.priority-b.priority||(a.key<b.key?-1:1));
     for(const row of ordered){
-      const physical=row.id.split(".").slice(0,2).join(".");
+      const physical=row.physical_id || row.id.split(".").slice(0,2).join(".");
       if(!candidates.has(row.key)||stations.has(physical)||
         out.some(item=>Math.abs(row.lat-item.lat)<.001&&Math.abs(row.lon-item.lon)<.001))continue;
       stations.add(physical);out.push(row);
@@ -64,7 +64,10 @@ const SeismoProof=(()=>{
     if(!r||!Array.isArray(r.routes)||!["SEISMO-P3","SEISMO-P4"].includes(r.algorithm)||![1,3,5,10].includes(r.duration))
       throw Error("Άγνωστο αρχείο επαλήθευσης.");
     const spin=r.algorithm==="SEISMO-P4"?r.spin_seconds:20;
-    if(![20,30,45,60].includes(spin))throw Error("Μη έγκυρη διάρκεια περιστροφής.");
+    // Preserve replay for older proof exports.
+    const greekFirst=["seismo-greek-first-1.1","seismo-greek-first-beta.2"].includes(r.network_policy);
+    const extended=spin===330&&r.mode==="browser"&&(r.network_policy==="seismo-fdsn-1.1"||greekFirst);
+    if(![20,30,45,60].includes(spin)&&!extended)throw Error("Μη έγκυρη διάρκεια περιστροφής.");
     if(r.mode!=="archive"&& (r.start_ms!==(Math.floor(r.accepted_ms/10)+1)*10||
       r.freeze_ms!== (r.algorithm==="SEISMO-P4"?r.reveal_ms-2000:r.start_ms+17000)||r.reveal_ms!==r.accepted_ms+spin*1000))
       throw Error("Ασυμφωνία χρονικού παραθύρου.");
@@ -83,6 +86,9 @@ const SeismoProof=(()=>{
     const present=new Map(),missing=[];
     for(const row of r.routes){
       const st=routeMap.get(row.key);
+      if(greekFirst&&r.mode==="browser"&&row.complete&&
+        (!Number.isInteger(row.arrival_ms)||row.arrival_ms<r.start_ms||row.arrival_ms>r.freeze_ms))
+        throw Error("Δείγματα εκτός προθεσμίας λήψης.");
       if(!st||!Number.isInteger(st.hz)||st.hz<1||st.hz>1000)
         throw Error("Άγνωστη διαδρομή στην απόδειξη.");
       let bytes;

@@ -204,3 +204,49 @@ CORS και miniSEED OK|CORS and miniSEED OK
 Άνοιγμα πρωτογενούς miniSEED:|Open original miniSEED:
 
 Γλώσσα|Language
+
+Κενό χρονικό παράθυρο|No data for this window
+Απορρίφθηκε το αίτημα|Request rejected
+Πόρος μη διαθέσιμος|Resource unavailable
+Όριο μεγέθους αιτήματος|Request size limit
+Αποστολή μετά το παράθυρο|Sent after window end
+Υπέρβαση μεγέθους miniSEED|miniSEED response too large
+
+Σχετικά με το SEISMO|About SEISMO
+Πάροχος|Provider
+Ηνωμένες Πολιτείες|United States
+Γαλλία|France
+Τελευταίο δείγμα|Last sample
+Επαρκούν οι ελληνικοί σταθμοί|Greek coverage sufficient
+Αρχειακή διαδρομή στον σύντομο γύρο|Archive route in short round
+Ελληνικό αποτέλεσμα|Greek-only result
+Μικτό αποτέλεσμα|Mixed result
+Διεθνές αποτέλεσμα|International-only result
+Ελλιπής κάλυψη|Insufficient coverage
+Δείγματα εκτός προθεσμίας λήψης.|Samples arrived after the collection deadline.
+Φθιώτιδα|Phthiotis
+Έβρος|Evros
+Πιερία|Pieria
+Ροδόπη|Rhodope
+Ροδόπη (RDO)|Rhodope (RDO)
+Κέρκυρα|Corfu
+Ιόνια Νησιά|Ionian Islands
+Μεσσηνία|Messenia
+Αρχάγγελος|Archangelos
+Αλεξανδρούπολη|Alexandroupoli
+Λιτόχωρο|Litochoro
+Μαλαμάτα|Malamata
+Τέμενη|Temeni
+Τριζόνια|Trizonia
+Κορινθιακός κόλπος|Gulf of Corinth
+Κορινθιακός / CL|Corinth Rift / CL
+ΑΠΘ / HT|AUTH / HT
+Νότια Καλιφόρνια|Southern California
+Νέο Μεξικό|New Mexico
+Ναγκάνο|Nagano
+Κονγκσμπέργκ|Kongsberg
+Αλάσκα|Alaska
+Όρη του Δουβλίνου|Dublin Mountains
+Βόρεια Ρηνανία-Βεστφαλία|North Rhine-Westphalia
+Περιφέρεια Χόμας|Khomas Region
+Η AGPL v3 αφορά τον πηγαίο κώδικα. Η CC BY-SA 4.0 αφορά το περιεχόμενο που φέρει αυτή την άδεια. Τα σεισμολογικά δεδομένα τρίτων διατίθενται με τους όρους και τις αναφορές του αντίστοιχου δικτύου και παρόχου.|AGPL v3 applies to source code. CC BY-SA 4.0 applies to content released under that license. Third-party seismic data follow the terms and attribution of each network and provider.

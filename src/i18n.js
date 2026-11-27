@@ -1,7 +1,7 @@
 "use strict";
 const SeismoLocale=(()=>{
   const {phrases,pages}=window.SEISMO_LOCALE;
-  const dynamicSelector="#mode,#output,#digest,#stage,#roundlink,#roundActions,#historyRows,#attempts,#telemetryNote,#stationList,#archiveCharts,#archiveResult,#proofResult,#extraProof,#transport,#wssStatus";
+  const dynamicSelector="#outcome,#mode,#output,#digest,#stage,#roundlink,#roundActions,#historyRows,#attempts,#telemetryNote,#stationList,#archiveCharts,#archiveResult,#proofResult,#extraProof,#transport,#wssStatus";
   const memorized=new WeakMap();
   const root=new URL(document.body.dataset.root,location.href);
   const standalone=document.body.dataset.standalone==="true";

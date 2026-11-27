@@ -113,3 +113,22 @@ footer p{margin:.2rem 0}
 .jump{position:absolute;left:1rem;top:-20rem;z-index:10;background:#fff;color:#10271e;padding:.6rem}
 .jump:focus{top:.5rem}
 @media(max-width:550px){.top .mode{display:none}.top .phase{font-size:.76rem}.intro h1{font-size:2.05rem}.lang-nav a{padding:.3rem .4rem}}
+
+.science{margin:0;padding:0;border:0}
+.info-section,.archive#direct{width:100%;padding:.68rem .85rem;border:1px solid var(--edge);border-radius:.6rem;background:#112821}
+.info-section summary,.archive#direct summary{display:flex;align-items:center;gap:.6rem;list-style:none;color:var(--gold);font-weight:650}
+.info-section summary::-webkit-details-marker,.archive#direct summary::-webkit-details-marker{display:none}
+.info-section summary::before,.archive#direct summary::before{content:"";width:0;height:0;flex:none;border-block:.28rem solid transparent;border-inline-start:.4rem solid currentColor}
+.info-section[open] summary::before,.archive#direct[open] summary::before{transform:rotate(90deg)}
+.section-copy{max-width:100ch;padding:.45rem 0 .2rem 1rem;line-height:1.65;overflow-wrap:anywhere}
+.section-copy p{margin:.45rem 0}
+.section-copy h3{margin:1rem 0 .3rem}
+.site-footer{display:block;text-align:center;margin:1.3rem 0 0;padding:.9rem 0;border-top:1px solid var(--edge);overflow-wrap:anywhere}
+.site-footer p{margin:.32rem 0}
+.outcome{align-self:center;width:fit-content;max-width:100%;margin:.3rem auto .55rem;padding:.25rem .7rem;border:1px solid var(--edge);border-radius:.45rem;color:var(--gold);font-size:.85rem}
+.outcome-local{border-color:#527fb8;background:#122b42;color:#d5e9ff}
+.outcome-mixed{border-color:#547f71;background:#18372f;color:#d4efdf}
+.outcome-global{border-color:#8c7139;background:#382e1a;color:#f8dfa3}
+.outcome-none{border-color:#a4615b;background:#3e2421;color:#ffd5cc}
+.station,.station-head>div{min-width:0}
+.station-head span,.attempt{overflow-wrap:anywhere}
